@@ -1,0 +1,12 @@
+div.home-cover {
+	height: 300px;
+	background-color: #ebebeb;
+}
+
+div.highlight h1 {
+	font-family: 'Oswald', arial;
+	font-size: 4em;
+	text-align: center;
+	margin: 50px 0 20px 0;
+	padding: 0;
+}

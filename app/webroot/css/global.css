@@ -1,0 +1,21 @@
+body {
+	margin: 0;
+	padding: 0;
+
+	font-family: 'Open Sans', arial;
+}
+
+/* Overridden Bootstrap Styles */
+
+.btn, .form-control, .navbar-default, .navbar-inverse, .panel-group .panel, .panel, .dropdown-menu, .alert, .breadcrumb { 
+    border-radius: 0;
+}
+
+.dropdown-menu {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.navbar-default {
+	margin: 0;
+}
