@@ -8,6 +8,8 @@ class SiteController extends AppController {
 		parent::beforeFilter();
 
 		$this->layout = 'bootstrap/default_site';
+
+		$this->Auth->allow();
 	}
 
 	public function index() {

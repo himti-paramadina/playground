@@ -7,7 +7,6 @@
 	</title>
 
 	<!-- Google Fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700' rel='stylesheet' type='text/css'>
 
 	<?php
@@ -20,12 +19,21 @@
 	?>
 </head>
 <body>
-	<?php echo $this->Element('navigation/site') ?>
+	<?php
+		if (AuthComponent::user('id_user') != null):
+			echo $this->Element('navigation/user');
+		else:
+			echo $this->Element('navigation/site');
+		endif; 
+	?>
+	
 	<div class="container">
 		<?php echo $this->Session->flash(); ?>
 
 		<?php echo $this->fetch('content'); ?>
 	</div>
+	<?php echo $this->ELement('footer') ?>
+
 	<?php // echo $this->element('sql_dump'); ?>
 </body>
 </html>

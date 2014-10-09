@@ -1,12 +1,39 @@
 div.home-cover {
 	height: 300px;
-	background-color: #ebebeb;
+	background-color: #111;
+	color: white;
 }
 
-div.highlight h1 {
-	font-family: 'Oswald', arial;
+div.home-cover h1 {
 	font-size: 4em;
+	font-weight: 700;
 	text-align: center;
 	margin: 50px 0 20px 0;
 	padding: 0;
+	color: white;
+}
+
+div.home-cover a {
+	color: yellow;
+}
+
+div.home-cover a.button {
+	color: white;
+	font-size: 1.4em;
+	padding: 15px;
+	border: solid 1px white;
+	margin: 20px 0 10px 0;
+	display: inline-block;
+}
+
+div.home-cover a.button:hover {
+	color: yellow;
+	border: solid 1px yellow;
+	text-decoration: none;
+}
+
+div.footer {
+	background-color: #111;
+	color: white;
+	padding: 40px 0 40px 0;
 }

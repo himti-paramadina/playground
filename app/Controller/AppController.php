@@ -32,10 +32,44 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
+	public $components = array(
+        'Session',
+		'Auth' => array(
+			'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'login',
+                'administration' => false,
+                'api' => false
+            ),
+            'loginRedirect' => array(
+                'controller' => 'users',
+                'action' => 'dashboard',
+                'administration' => false,
+                'api' => false
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'site',
+                'action' => 'index',
+                'administration' => false,
+                'api' => false
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'email')
+                )
+            ),
+            'authorize' => array('Controller')
+		)
+	);
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 
 		$this->layout = "bootstrap/default";
+	}
+
+	public function isAuthorized() {
+		return true;
 	}
 
 }

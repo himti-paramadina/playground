@@ -14,8 +14,38 @@ body {
 .dropdown-menu {
     box-shadow: none;
     -webkit-box-shadow: none;
+    border: solid 1px #ebebeb;
 }
 
 .navbar-default {
 	margin: 0;
+	background-color: #ff2200;
+	border: none;
+}
+
+.navbar-inverse {
+	margin: 0;
+	border: none;
+}
+
+.navbar-default .navbar-brand, .navbar-inverse .navbar-brand {
+	color: white;
+}
+
+.navbar-default .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a {
+	color: white;
+}
+
+.md-editor>textarea {
+	padding: 10px;
+}
+
+/* Misc. */
+
+.no-margin {
+	margin: 0;
+}
+
+.no-padding {
+	padding: 0;
 }
