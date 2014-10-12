@@ -9,7 +9,12 @@ class QuizzesController extends AppController {
 	);
 
 	public function detail($unique_name) {
+		$this->Quiz->recursive = 1;
+		$quiz = $this->Quiz->findByunique_name($unique_name);
 
+		$this->set('quiz', $quiz);
+
+		$this->set('title_for_layout', $quiz['Quiz']['name']);
 	}
 
 	/* Administration Functions */

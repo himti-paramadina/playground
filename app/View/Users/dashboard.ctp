@@ -21,7 +21,9 @@
 				<div class="row entry-item-style-1">
 					<div class="col-md-12">
 						<h1 class="no-margin no-padding"><?php echo $quiz['name'] ?></h1>
-						<p class="no-margin no-padding"><span class="glyphicon glyphicon-time"></span><em> <?php echo $quiz['start_time'] ?> until <?php echo $quiz['end_time'] ?></em></p>
+						<p class="no-margin no-padding">
+							<span class="glyphicon glyphicon-time"></span><em> <?php echo $quiz['start_time'] ?> until <?php echo $quiz['end_time'] ?></em>
+						</p>
 						<p class="no-margin no-padding">&nbsp;</p>
 
 						<?php echo $this->Markdown->parse($quiz['description']) ?>

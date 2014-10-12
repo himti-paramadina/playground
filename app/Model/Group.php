@@ -5,6 +5,10 @@ class Group extends AppModel {
 
 	public $primaryKey = 'id_group';
 
+	public $belongsTo = array(
+		'User'
+	);
+
 	public $hasMany = array(
 		'Quiz'
 	);

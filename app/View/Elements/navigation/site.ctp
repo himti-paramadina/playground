@@ -10,5 +10,9 @@
             </button>
         <a class="navbar-brand" href="<?php echo Router::url('/') ?>">Playground</a>
         </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" style="color: white;"><span class="glyphicon glyphicon-time"></span> <span id="servertime">Loading server time...</span></a></li>
+        </ul>
     </div><!-- /.container-fluid -->
 </nav>

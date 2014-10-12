@@ -47,7 +47,7 @@ class UsersController extends AppController {
 
 		$userGroups = $this->UserGroup->find('all', array(
 			'conditions' => array(
-				'user_id' => $this->Auth->user('id_user')
+				'UserGroup.user_id' => $this->Auth->user('id_user')
 			)
 		));
 

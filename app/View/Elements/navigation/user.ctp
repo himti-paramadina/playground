@@ -25,6 +25,7 @@
                     <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'logout', 'administration' => false)) ?>">Go Out</a></li>
                 </ul>
             </li>
+            <li><a href="#" style="color: white;"><span class="glyphicon glyphicon-time"></span> <span id="servertime">Loading server time...</span></a></li>
         </ul>
     </div><!-- /.container-fluid -->
 </nav>
