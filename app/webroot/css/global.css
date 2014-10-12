@@ -7,7 +7,7 @@ body {
 
 /* Overridden Bootstrap Styles */
 
-.btn, .form-control, .navbar-default, .navbar-inverse, .panel-group .panel, .panel, .dropdown-menu, .alert, .breadcrumb { 
+.btn, .form-control, .navbar-default, .navbar-inverse, .panel-group .panel, .panel, .dropdown-menu, .alert, .breadcrumb, .list-group-item:first-child, .list-group-item:last-child { 
     border-radius: 0;
 }
 

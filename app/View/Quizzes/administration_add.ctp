@@ -11,6 +11,7 @@
 
 		<?php echo $this->Form->input('Quiz.name', array('div' => 'form-group', 'class' => 'form-control')) ?>
 		<?php echo $this->Form->input('Quiz.unique_name', array('div' => 'form-group', 'class' => 'form-control')) ?>
+		<?php echo $this->Form->input('Quiz.group_id', array('div' => 'form-group', 'class' => 'form-control')) ?>
 		<?php echo $this->Form->input('Quiz.start_time', array('div' => 'form-group', 'class' => 'form-control')) ?>
 		<?php echo $this->Form->input('Quiz.end_time', array('div' => 'form-group', 'class' => 'form-control')) ?>
 		<?php echo $this->Form->input('Quiz.description', array('data-provide' => 'markdown', 'div' => 'form-group', 'class' => 'form-control')) ?>

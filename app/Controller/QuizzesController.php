@@ -1,12 +1,14 @@
 <?php
 
+App::import('Vendor', 'Parsedown', array('file' => 'Parsedown/Parsedown.php'));
+
 class QuizzesController extends AppController {
 
 	public $components = array(
 		'Paginator', 'RequestHandler'
 	);
 
-	public function detail($identifier) {
+	public function detail($unique_name) {
 
 	}
 
@@ -19,12 +21,24 @@ class QuizzesController extends AppController {
 	public function administration_add() {
 		if ($this->request->is('post')) {
 			$newIdentifier = md5(uniqid($this->Auth->user('email'), true));
+
+			$this->request->data['Quiz']['identifier'] = $newIdentifier;
+			$this->request->data['Quiz']['library_url'] = Router::url('/', true);
+			$this->request->data['Quiz']['published'] = false;
+			$this->request->data['Quiz']['user_id'] = $this->Auth->user('id_user');
+			$this->request->data['Quiz']['created'] = date('Y-m-d H:i:s');
+
 			if ($this->Quiz->save($this->request->data)) {
 				$this->Session->setFlash("Success creating your quiz. Now, please add some problems.", 'flash/success');
 				$this->redirect(array('controller' => 'problems', 'action' => 'index', $newIdentifier, 'administration' => true));
 			}
 		}
 		
+		$this->loadModel('Group');
+		$groups = $this->Group->find('list');
+
+		$this->set('groups', $groups);
+
 		$this->set('title_for_layout', "Add New Quiz");
 	}
 

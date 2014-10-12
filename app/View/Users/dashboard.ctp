@@ -1,3 +1,40 @@
 <div class="row">
-
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1><span class="glyphicon glyphicon-dashboard"></span> Dashboard</h1>
+		</div>
+	</div>
 </div>
+
+<?php foreach ($userGroups as $userGroup): ?>
+<div class="row group">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h2 style="font-weight: bold;"><?php echo $userGroup['Group']['name'] ?></h2>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<h3 class="no-margin no-padding">Available Quizzes</h3>
+			</div>
+			<div class="col-md-9">
+				<?php foreach ($userGroup['Group']['Quiz'] as $quiz): ?>
+				<div class="row entry-item-style-1">
+					<div class="col-md-12">
+						<h1 class="no-margin no-padding"><?php echo $quiz['name'] ?></h1>
+						<p class="no-margin no-padding"><span class="glyphicon glyphicon-time"></span><em> <?php echo $quiz['start_time'] ?> until <?php echo $quiz['end_time'] ?></em></p>
+						<p class="no-margin no-padding">&nbsp;</p>
+
+						<?php echo $this->Markdown->parse($quiz['description']) ?>
+
+						<p class="no-margin no-padding">&nbsp;</p>
+						<p align="right">
+							<a href="<?php echo Router::url('/quizzes/detail/' . $quiz['unique_name']) ?>" class="btn btn-success">Show Me!</a>
+						</p>						
+					</div>
+				</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endforeach; ?>

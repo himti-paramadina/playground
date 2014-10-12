@@ -2,10 +2,16 @@
 
 App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
+App::import('Vendor', 'Parsedown', array('file' => 'Parsedown/Parsedown.php'));
+
 class UsersController extends AppController {
 
 	public $components = array(
 		'Paginator'
+	);
+
+	public $helpers = array(
+		'Markdown'
 	);
 
 	public function beforeFilter() {
@@ -15,10 +21,13 @@ class UsersController extends AppController {
 	}
 
 	public function login() {
+		if ($this->Auth->user('id_user') != null) {
+			$this->redirect(array('controller' => 'users', 'action' => 'dashboard', 'administration' => false));
+		}
+
 		if ($this->request->is('post')) {
-			
-			echo $passwordHasher->hash($this->request->data['User']['password']);
-	        if ($this->Auth->login()) {
+
+			if ($this->Auth->login()) {
 	            return $this->redirect($this->Auth->redirect());
 	        }
 	        
@@ -33,7 +42,18 @@ class UsersController extends AppController {
 	}
 
 	public function dashboard() {
+		$this->loadModel('UserGroup');
+		$this->UserGroup->recursive = 2;
 
+		$userGroups = $this->UserGroup->find('all', array(
+			'conditions' => array(
+				'user_id' => $this->Auth->user('id_user')
+			)
+		));
+
+		$this->set('userGroups', $userGroups);
+
+		$this->set('title_for_layout', "Dashboard");
 	}
 
 	/* Administration Functions */

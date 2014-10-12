@@ -27,8 +27,8 @@ div.home-cover a.button {
 }
 
 div.home-cover a.button:hover {
-	color: yellow;
-	border: solid 1px yellow;
+	color: red;
+	border: solid 1px red;
 	text-decoration: none;
 }
 

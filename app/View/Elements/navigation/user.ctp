@@ -12,8 +12,8 @@
         </div>
 
         <ul class="nav navbar-nav">
-            <li><a href="#">Quizzes</a></li>
-            <li><a href="#">Groups</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard', 'administration' => false)) ?>">Dashboard</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'groups', 'action' => 'index', 'administration' => false)) ?>">Groups</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
