@@ -53,6 +53,14 @@
                     <li><a href="<?php echo Router::url(array('controller' => 'quizzes', 'action' => 'index', 'administration' => true)) ?>"><span class="glyphicon glyphicon-book"></span> Quiz List</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Users <span class="caret"></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'add', 'administration' => true)) ?>"><span class="glyphicon glyphicon-plus-sign"></span> Add New User</a></li>
+                    <li class="divider"></li>
+                    <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'index', 'administration' => true)) ?>"><span class="glyphicon glyphicon-book"></span> User List</a></li>
+                </ul>
+            </li>
             <li><a href="#">Manage Groups</a></li>
         </ul>
     </div><!-- /.container-fluid -->

@@ -10,6 +10,7 @@ class ProblemsController extends AppController {
 	public $paginate = array(
 		'limit' => 10,
 		'fields' => array(
+			'Problem.id_problem',
 			'Problem.name',
 			'Problem.unique_name',
 			'Problem.order'
@@ -22,7 +23,7 @@ class ProblemsController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 
-		$this->Auth->allow('api_download');
+		$this->Auth->allow('api_detail');
 	}
 
 	public function index($quizUniqueName) {
@@ -93,7 +94,28 @@ class ProblemsController extends AppController {
 	}
 
 	public function administration_edit($id) {
+		$this->Problem->recursive = 0;
 
+		$problem = $this->Problem->findByid_problem($id);
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->request->data['Problem']['id_problem'] = $problem['Problem']['id_problem'];
+			$this->request->data['Problem']['quiz_id'] = $problem['Quiz']['id_quiz'];
+
+			if ($this->Problem->save($this->request->data)) {
+				$this->Session->setFlash("Your changes has been saved successfully.", 'flash/success');
+				$this->redirect(array('controller' => 'problems', 'action' => 'index', $problem['Quiz']['identifier'], 'administration' => true));
+			}
+			else {
+				$this->Session->setFlash("Error while saving your changes.", 'flash/danger');
+			}
+		}
+
+		$this->request->data = $problem;
+
+		$this->set('problem', $problem);
+
+		$this->set('title_for_layout', "Edit Problem: " . $problem['Problem']['name']);
 	}
 
 	public function administration_delete($id) {
@@ -102,20 +124,13 @@ class ProblemsController extends AppController {
 
 	/* API Functions */
 
-	public function api_index() {
-
-	}
-
-	public function api_detail() {
-
-	}
-
-	public function api_download($identifier) {
-		$problem = $this->Problem->findByidentifier($identifier);
+	public function api_detail($uniqueName) {
+		$problem = $this->Problem->findByunique_name($uniqueName);
 
 		$response = $problem['Problem'];
 
 		$this->set(compact('response'));
         $this->set('_serialize', array('response'));
 	}
+
 }

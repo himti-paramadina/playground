@@ -12,4 +12,8 @@ class Quiz extends AppModel {
 	public $hasMany = array(
 		'Problem'
 	);
+
+	public function getScoreBoard($quiz_id) {
+		
+	}
 }

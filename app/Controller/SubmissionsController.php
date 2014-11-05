@@ -10,6 +10,12 @@ class SubmissionsController extends AppController {
 		'limit' => 20
 	);
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+
+		$this->Auth->allow('api_add');
+	}
+
 	public function index() {
 		$this->Paginator->settings = $this->paginate;
 		$submissions = $this->Paginator->paginate();
@@ -42,28 +48,74 @@ class SubmissionsController extends AppController {
 
 	/*
 		data = array(
-			'quiz_identifier' =>
-			'problem_identifier' =>
-			'score' =>
 			'email' =>
 			'token' =>
+
+			'problem_identifier' =>
+
+			'score' =>
 		)
 	*/
 	public function api_add() {
+		$response = array();
+
 		if ($this->request->is('post')) {
-			$newSubmission = array(
-				'Submission' => array(
-					'created' => date('Y-m-d H:i:s'),
-					'quiz_id' => ,
-					'problem_id' => ,
-					'score' => ,
-				)
-			)
+			$this->loadModel('Participation')
+			$this->loadModel('Problem');
+			$this->loadModel('Quiz');
+			$this->loadModel('User');
 
-			if ($this->Submission->save($newSubmission)) {
+			$participation = $this->Participation->findBytoken($this->request->data['token']);
+			
+			$quiz = $this->Quiz->findByid_quiz($participation['Participation']['quiz_id']);
 
+			if ($participation) {
+				$user = $this->User->findByuser_id($participation['Participation']['user_id']);
+
+				if (strcmp($user['User']['email'], $this->request->data['email'])) {
+					$problem = $this->Problem->findByidentifer($this->request->data['problem_identifier']);
+
+					if ($problem) {
+						$newSubmission = array(
+							'Submission' => array(
+								'created' => date('Y-m-d H:i:s'),
+								'quiz_id' => $problem['Problem']['quiz_id'],
+								'problem_id' => $this->request->data['problem_id'],
+								'user_id' => $this->request->data['quiz_id'],
+								'score' => $this->request->data['score'],
+							)
+						);
+
+						if ($this->Submission->save($newSubmission)) {
+							$this->loadModel('Scoreboard');
+
+							$scoreboardEntry = $this->Scoreboard->findByproblem_id($problem['Problem']['id_problem']);
+
+							if ($scoreboardEntry['Scoreboard']['score'] < $newSubmission['Submission']['score']) {
+								$scoreboardEntry['Scoreboard']['score'] = $newSubmission['Submission']['score'];
+
+								$this->Scoreboard->save($scoreboardEntry);
+							}
+						}
+
+						$response['message'] = "Success submitting your score.";
+						$response['result'] = $newSubmission;
+					}
+					else {
+						$response['message'] = "Wrong problem identifier. (Are you trying to hack the system?)";
+					}
+				}
+				else {
+					$response['message'] = "Wrong email supplied. Please check your credential.";	
+				}
+			}
+			else {
+				$response['message'] = "Wrong token supplied. Please check your credential.";
 			}
 		}
+
+		$this->set(compact('response'));
+        $this->set('_serialize', array('response'));
 	}
 
 }

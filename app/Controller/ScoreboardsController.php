@@ -1,9 +1,9 @@
 <?php
 
 class ScoreboardsController extends AppController {
-	public $uses = array();
 
-	public function view($quizIdentifier) {
-		
+	public function view($quizUniqueName) {
+		$this->loadModel('Quiz');
 	}
+	
 }

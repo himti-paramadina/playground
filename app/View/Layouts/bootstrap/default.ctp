@@ -24,7 +24,13 @@
     </script>
 </head>
 <body>
-	<?php echo $this->Element('navigation/site') ?>
+	<?php
+		if (AuthComponent::user('id_user') != null):
+			echo $this->Element('navigation/user');
+		else:
+			echo $this->Element('navigation/site');
+		endif; 
+	?>
 	<div class="container">
 		<?php echo $this->Session->flash(); ?>
 

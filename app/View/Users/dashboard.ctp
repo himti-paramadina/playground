@@ -17,7 +17,9 @@
 				<h3 class="no-margin no-padding">Available Quizzes</h3>
 			</div>
 			<div class="col-md-9">
+				<?php $count = 0; ?>
 				<?php foreach ($userGroup['Group']['Quiz'] as $quiz): ?>
+				<?php 	  if (($quiz['published'])/* && ($quiz['end_time'] < date('Y-m-d H:i:s'))*/): $count++; ?>
 				<div class="row entry-item-style-1">
 					<div class="col-md-12">
 						<h1 class="no-margin no-padding"><?php echo $quiz['name'] ?></h1>
@@ -30,11 +32,16 @@
 
 						<p class="no-margin no-padding">&nbsp;</p>
 						<p align="right">
-							<a href="<?php echo Router::url('/quizzes/detail/' . $quiz['unique_name']) ?>" class="btn btn-success">Show Me!</a>
+							<a href="<?php echo Router::url('/quizzes/detail/' . $quiz['unique_name']) ?>" class="btn btn-success">Participate and Show Me!</a>
 						</p>						
 					</div>
 				</div>
+				<?php     endif; ?>
 				<?php endforeach; ?>
+
+				<?php if ($count == 0): ?>
+				<p style="border: solid 1px #ebebeb; margin: 0; padding: 20px;" align="center"><em>There are no quiz available for this group right now.</em></p>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

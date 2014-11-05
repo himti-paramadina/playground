@@ -14,10 +14,14 @@ class UsersController extends AppController {
 		'Markdown'
 	);
 
+	public $paginate = array(
+		'limit' => 20
+	);
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 
-		$this->Auth->allow('administration_add');
+		$this->Auth->allow('register', 'administration_add');
 	}
 
 	public function login() {
@@ -56,9 +60,21 @@ class UsersController extends AppController {
 		$this->set('title_for_layout', "Dashboard");
 	}
 
+	public function register() {
+		$this->set('title_for_layout', "Registration");
+	}
+
 	/* Administration Functions */
 
 	public function administration_index() {
+		$this->User->recursive = 0;
+
+		$this->Paginator->settings = $this->paginate;
+
+		$users = $this->Paginator->paginate();
+
+		$this->set('users', $users);
+
 		$this->set('title_for_layout', "Index of Users");
 	}
 

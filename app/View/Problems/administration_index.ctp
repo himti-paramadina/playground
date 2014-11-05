@@ -7,7 +7,9 @@
 </div>
 <div class="row">
 	<div class="col-md-4 user-action">
-		<h1>Actions</h1>
+		<div class="page-header" style="margin-top: 0;">
+			<h3 class="no-margin no-padding">Actions</h3>
+		</div>
 
 		<div class="list-group">
 			<a href="<?php echo Router::url(array('controller' => 'problems', 'action' => 'add', $quiz['Quiz']['identifier'], 'administration' => true)) ?>" class="list-group-item">Add New Problem</a>
@@ -31,8 +33,7 @@
 					<td><?php echo $problem['Problem']['name'] ?></td>
 					<td><?php echo $problem['Problem']['order'] ?></td>
 					<td>
-						<a href="#" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Preview"><span class="glyphicon glyphicon-eye-open"></span></a>
-						<a href="#" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="<?php echo Router::url(array('controller' => 'problems', 'action' => 'edit', $problem['Problem']['id_problem'], 'administration' => true)) ?>" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
 						<a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
 					</td>
 				</tr>
