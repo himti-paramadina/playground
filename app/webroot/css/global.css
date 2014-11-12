@@ -40,6 +40,33 @@ body {
 	padding: 10px;
 }
 
+/* Coloring */
+
+span.score {
+	display: block;
+	padding: 2px 5px;
+}
+
+.bg-red {
+	background-color: red !important;
+	color: white !important;
+}
+
+.bg-orange {
+	background-color: orange !important;
+	color: white !important;
+}
+
+.bg-green {
+	background-color: green !important;
+	color: white !important;
+}
+
+.bg-gray {
+	background-color: gray !important;
+	color: white !important;
+}
+
 /* Misc. */
 
 .no-margin {
