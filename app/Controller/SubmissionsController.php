@@ -16,7 +16,7 @@ class SubmissionsController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 
-		$this->Auth->allow('api_add');
+		$this->Auth->allow('history', 'api_add');
 	}
 
 	public function index() {
@@ -98,7 +98,12 @@ class SubmissionsController extends AppController {
 
 							$this->loadModel('Scoreboard');
 
-							$scoreboardEntry = $this->Scoreboard->findByproblem_id($problem['Problem']['id_problem']);	
+							$scoreboardEntry = $this->Scoreboard->find('first', array(
+								'conditions' => array(
+									'problem_id' => $problem['Problem']['id_problem'],
+									'user_id' => $user['User']['id_user']
+								)
+							));	
 
 							if ($scoreboardEntry['Scoreboard']['score'] < 100) {
 								if ($this->Submission->save($newSubmission)) {
@@ -119,7 +124,7 @@ class SubmissionsController extends AppController {
 											$response['message'] = "Your submission has been checked. Accepted in 1 shot! Congratulations!";
 										}
 										else {
-											$response['message'] = "Your submission has been checked. After " . " attempts, your solution has been accepted. Congratulations!";
+											$response['message'] = "Your submission has been checked. After " . $scoreboardEntry['Scoreboard']['attempt'] . " attempts, your solution has been accepted. Congratulations!";
 										}
 									}
 

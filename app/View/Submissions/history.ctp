@@ -15,8 +15,8 @@
 				<th>User</th>
 			</thead>
 			<tbody>
-
-			<?php foreach ($submissions as $submission): ?>
+			<?php $count = 0; ?>
+			<?php foreach ($submissions as $submission): $count++; ?>
 				<tr>
 					<td><?php echo $submission['Submission']['created'] ?></td>
 					<td><span class="label <?php if ($submission['Submission']['score'] == 100): ?>label-success<?php else: ?>label-default<?php endif; ?>"><?php echo $submission['Problem']['name'] ?></span></td>
@@ -44,6 +44,14 @@
 					</td>
 				</tr>
 			<?php endforeach; ?>
+
+			<?php if ($count == 0): ?>
+				<tr>
+					<td colspan="4">
+						<p align="center"><em>- no submission yet -</em></p>
+					</td>
+				</tr>
+			<?php endif; ?>
 			</tbody>
 		</table>
 

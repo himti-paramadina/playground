@@ -45,6 +45,7 @@ body {
 span.score {
 	display: block;
 	padding: 2px 5px;
+	text-align: center;
 }
 
 .bg-red {
