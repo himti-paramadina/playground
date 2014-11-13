@@ -29,12 +29,31 @@
 				</tr>
 				<?php $rank = 0; ?>
 				<?php foreach ($scoreboardData as $datum): $rank++; ?>
+
+					<?php
+						$totalScoreClass = "";
+						$expectedTotalScore = count($problems) * 100;
+						if ($datum[0]['_total'] == $expectedTotalScore) {
+							$totalScoreClass = "bg-green";
+						}
+						else if ($datum[0]['_total'] >= 0.75 * $expectedTotalScore) {
+							$totalScoreClass = "bg-orange";
+						}
+						else if ($datum[0]['_total'] >= 0.5 * $expectedTotalScore) {
+							$totalScoreClass = "bg-red";
+						}
+						else {
+							$totalScoreClass = "bg-gray";
+						}
+					?>
 				<tr>
-					<td style="text-align: center;"><?php echo '#' . $rank ?></td>
+					<td style="text-align: center;">
+						<p class="no-margin no-padding"><?php echo '#' . $rank ?></p>
+					</td>
 					<td>
 						<p class="no-margin no-padding"><strong><?php echo $datum['users']['display_name'] ?></strong></p>
 						<p class="no-margin no-padding" style="font-size: 0.8em; color: gray;"><?php echo $datum['roles']['name'] ?></p>
-					
+						<div class="<?php echo $totalScoreClass ?>" style="margin-top: 3px; width: <?php echo $datum[0]['_total'] / $expectedTotalScore * 100 ?>%; height: 4px; display: block;"></div>
 					</td>
 					
 					<?php foreach ($problems as $problem): ?>
@@ -59,24 +78,10 @@
 					
 					<?php endforeach; ?>
 
-					<?php
-						$totalScoreClass = "";
-						$expectedTotalScore = count($problems) * 100;
-						if ($datum[0]['_total'] == $expectedTotalScore) {
-							$totalScoreClass = "bg-green";
-						}
-						else if ($datum[0]['_total'] >= 0.75 * $expectedTotalScore) {
-							$totalScoreClass = "bg-orange";
-						}
-						else if ($datum[0]['_total'] >= 0.5 * $expectedTotalScore) {
-							$totalScoreClass = "bg-red";
-						}
-						else {
-							$totalScoreClass = "bg-gray";
-						}
-					?>
-
-					<td style="text-align: center;"><?php echo $datum['scoreboards']['attempt'] ?>/<?php echo $datum[0]['_solved'] ?></td>
+					<td style="text-align: center;">
+						<p class="no-margin no-padding"><?php echo $datum['scoreboards']['attempt'] ?>/<?php echo $datum[0]['_solved'] ?></p>
+						<p class="no-margin no-padding" style="font-size: 0.6em;"><span class="glyphicon glyphicon-time"></span> <?php echo $datum[0]['_elapsed_time'] ?></p>
+					</td>
 					<td style="text-align: center;"><span class="score <?php echo $totalScoreClass ?>"><?php echo $datum[0]['_total'] ?></span></td>
 				</tr>
 				<?php endforeach; ?>

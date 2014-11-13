@@ -6,7 +6,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6 col-md-offset-3">
+	<div class="col-md-6">
 		<?php echo $this->Form->create('Problem') ?>
 
 		<?php echo $this->Form->input('Problem.name', array('div' => 'form-group', 'class' => 'form-control')) ?>
@@ -20,8 +20,21 @@
 
 		<?php echo $this->Form->end(); ?>
 	</div>
+	<div class="col-md-6 markdown" style="border: 2px dotted #ebebeb;">
+		<h1 align="center"><?php echo $this->request->data['Problem']['name'] ?></h1>
+		<div id="preview"></div>
+	</div>
 </div>
 
 <?php
 	echo $this->Html->script('bootstrap-markdown');
 ?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("div#preview").generateMarkdownPreview("textarea#ProblemDescription");
+	$("textarea#ProblemDescription").listenOnKeyboardPause(function () {
+		$("div#preview").generateMarkdownPreview("textarea#ProblemDescription");
+	});
+});
+</script>

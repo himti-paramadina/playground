@@ -8,7 +8,7 @@
 				</div>
 				<div class="col-md-3">
 					<div style="text-align: right;">
-						<a target="_blank" href="#" class="btn btn-success">Score Board</a>
+						<a target="_blank" href="<?php echo Router::url('/scoreboards/view/' . $quiz['Quiz']['unique_name']) ?>" class="btn btn-success">Scoreboard</a>
 						<a target="_blank" href="<?php echo Router::url('/submissions/history/' . $quiz['Quiz']['unique_name']) ?>" class="btn btn-info">Submissions</a>
 					</div>
 				</div>

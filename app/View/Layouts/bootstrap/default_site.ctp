@@ -16,10 +16,14 @@
 
 		echo $this->Html->script('jquery-1.11.1');
 		echo $this->Html->script('bootstrap');
+		echo $this->Html->script('playground');
 	?>
 
 	<script>
         var currenttime = '<?php echo date("F d, Y H:i:s", time())?>';
+        var CONFIG = {
+        	url: '<?php echo Router::url('/', true) ?>'
+        };
     </script>
 </head>
 <body>

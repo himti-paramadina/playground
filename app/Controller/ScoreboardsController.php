@@ -2,6 +2,12 @@
 
 class ScoreboardsController extends AppController {
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+
+		$this->Auth->allow('view');
+	}
+
 	public function view($quizUniqueName) {
 		$this->loadModel('Quiz');
 		$this->loadModel('Problem');

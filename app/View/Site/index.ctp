@@ -14,7 +14,7 @@
 
 <div class="container">
 	<div class="col-md-12">
-		<p class="lead" align="center" style="margin: 30px 0 30px 0;">Playground is an information portal for organizing programming quizzes in Universitas Paramadina.</p>
+		<p class="lead" align="center" style="margin: 30px 0 30px 0;">Playground is a portal for organizing programming quizzes in Universitas Paramadina.</p>
 	</div>
 </div>
 

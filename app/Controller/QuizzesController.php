@@ -126,7 +126,25 @@ class QuizzesController extends AppController {
 	}
 
 	public function administration_edit($id) {
+		$quiz = $this->Quiz->findByid_quiz($id);
 
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->request->data['Quiz']['id_quiz'] = $quiz['Quiz']['id_quiz'];
+
+			if ($this->Quiz->save($this->request->data)) {
+				$this->Session->setFlash("Your changes has been saved successfully.", 'flash/success');
+				$this->redirect(array('controller' => 'problems', 'action' => 'index', $problem['Quiz']['identifier'], 'administration' => true));
+			}
+			else {
+				$this->Session->setFlash("Error while saving your changes.", 'flash/danger');
+			}
+		}
+
+		$this->request->data = $problem;
+
+		$this->set('problem', $problem);
+
+		$this->set('title_for_layout', "Edit Problem: " . $problem['Problem']['name']);
 	}
 
 	public function administration_delete($id) {
@@ -160,8 +178,17 @@ class QuizzesController extends AppController {
 
 	/* API Functions */
 
-	public function api_check_availability() {
+	public function api_preview() {
+		$response = array();
 
+		if ($this->request->is('post')) {
+			$parser = new Parsedown();
+
+			$response['parsed_text'] = $parser->text($this->request->data['text']);	
+		}
+		
+		$this->set(compact('response'));
+        $this->set('_serialize', array('response'));
 	}
 
 }
