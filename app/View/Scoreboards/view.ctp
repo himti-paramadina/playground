@@ -79,7 +79,7 @@
 					<?php endforeach; ?>
 
 					<td style="text-align: center;">
-						<p class="no-margin no-padding"><?php echo $datum['scoreboards']['attempt'] ?>/<?php echo $datum[0]['_solved'] ?></p>
+						<p class="no-margin no-padding"><?php echo $datum[0]['_attempts'] ?>/<?php echo $datum[0]['_solved'] ?></p>
 						<p class="no-margin no-padding" style="font-size: 0.6em;"><span class="glyphicon glyphicon-time"></span> <?php echo $datum[0]['_elapsed_time'] ?></p>
 					</td>
 					<td style="text-align: center;"><span class="score <?php echo $totalScoreClass ?>"><?php echo $datum[0]['_total'] ?></span></td>

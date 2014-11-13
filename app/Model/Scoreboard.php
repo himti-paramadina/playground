@@ -25,6 +25,7 @@ class Scoreboard extends AppModel {
 			"roles.name, " .
 			"scoreboards.attempt, " .
 			"SUM(IF(scoreboards.score = 100, 1, 0)) AS `_solved`, " .
+			"SUM(scoreboards.attempt) AS `_attempts`, " .
 
 			$problemsPivot .
 			
@@ -68,6 +69,7 @@ class Scoreboard extends AppModel {
 			"roles.name, " .
 			"scoreboards.attempt, " .
 			"SUM(IF(scoreboards.score = 100, 1, 0)) AS `_solved`, " .
+			"SUM(scoreboards.attempt) AS `_attempts`, " .
 
 			$problemsPivot .
 			

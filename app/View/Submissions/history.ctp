@@ -76,7 +76,7 @@
 					
 					<?php endforeach; ?>
 
-					<td style="text-align: center;"><?php echo $datum['scoreboards']['attempt'] ?>/<?php echo $datum[0]['_solved'] ?></td>
+					<td style="text-align: center;"><?php echo $datum[0]['_attempts'] ?>/<?php echo $datum[0]['_solved'] ?></td>
 					<td style="text-align: center;"><span class="score <?php echo $totalScoreClass ?>"><?php echo $datum[0]['_total'] ?></span></td>
 				</tr>
 				<?php endforeach; ?>
